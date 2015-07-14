@@ -58,7 +58,7 @@ class JordiLlonchCrudCommand extends GenerateDoctrineCrudCommand
 
     protected function interact(InputInterface $input, OutputInterface $output)
     {
-        $dialog = $this->getDialogHelper();
+        $dialog = $this->getQuestionHelper();
         $dialog->writeSection($output, 'JordiLlonchCrudGeneratorBundle');
 
         parent::interact($input, $output);
