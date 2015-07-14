@@ -1,7 +1,7 @@
 {{ "{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}" }}
 
 {{ "{% block title %}" }}
-{{ "{{ parent() }} - {{ 'views.index.list'|trans({'%entity%': '" }}{{ entity }}{{ "'}, 'JordiLlonchCrudGeneratorBundle') }}" }}
+{{ "{{ parent() }} - {{ 'views.index.list'|trans({'%entity%': 'views.index.title." }}{{ entity }}{{ "'|trans }, 'JordiLlonchCrudGeneratorBundle') }}" }}
 {{ "{% endblock %}" }}
 
 {{ "{% block page %}" }}
@@ -9,7 +9,7 @@
 <div class="row">
 
     <div class="span8">
-        <h1>{{ "{{ 'views.index.list'|trans({'%entity%': '" }}{{ entity }}{{ "'}, 'JordiLlonchCrudGeneratorBundle') }}" }}</h1>
+        <h1>{{ "{{ 'views.index.list'|trans({'%entity%': 'views.index.title." }}{{ entity }}{{ "'|trans }, 'JordiLlonchCrudGeneratorBundle') }}" }}</h1>
     </div>
     <div class="span2">
         {{ '{% if form_errors(filterForm) %}' }}
@@ -22,6 +22,7 @@
     <div class="span2">
         <div class="filters-right">
             <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
+                <i class="icon-filter"></i>
                 {{ "{{ 'views.index.filters'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}
                 <span class="caret"></span>
             </a>
@@ -42,8 +43,8 @@
                 {{ "{{ form_rest(filterForm) }}" }}
 
                 <p>
-                    <button type="submit" name="filter_action" value="filter">{{ "{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}</button>
-                    <button type="submit" name="filter_action" value="reset">{{ "{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}</button>
+                    <button type="submit" name="filter_action" value="filter" class="btn btn-primary">{{ "{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}</button>
+                    <button type="submit" name="filter_action" value="reset" class="btn">{{ "{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}</button>
                 </p>
             </form>
         </div>
@@ -56,7 +57,7 @@
         <tr>
         {%- for field, metadata in fields %}
 
-            <th>{{ field|capitalize }}</th>
+            <th>{{ "{%trans%}" }}{{ field|capitalize }}{{ "{%endtrans%}" }}</th>
 
         {%- endfor %}
 
@@ -75,6 +76,10 @@
         {%- elseif metadata.type in ['date', 'datetime'] %}
 
             <td>{{ '{% if entity.'~ field|replace({'_': ''}) ~' %}{{ entity.'~ field|replace({'_': ''}) ~'|date(\'Y-m-d H:i:s\') }}{% endif %}' }}</td>
+
+        {%- elseif metadata.type in ['boolean'] %}
+
+            <td>{{ "{% if entity."~ field|replace({'_': ''}) ~" %}" }}<span class="badge badge-success"><i class="icon-ok icon-white"></i></span>{{ "{% else %}" }}<span class="badge badge-important"><i class="icon-remove icon-white"></i></span>{{ "{% endif %}" }}</td>
 
         {%- else %}
 
@@ -103,7 +108,8 @@
 
     {% if 'new' in actions %}
     <div class="span8">
-    <a class="btn btn-primary likepaginator" href="{{ "{{ path('"~ route_name_prefix ~"_new') }}" }}">
+        <a class="btn btn-primary likepaginator" href="{{ "{{ path('"~ route_name_prefix ~"_new') }}" }}">
+            <i class="icon-plus"></i>
             {{ "{{ 'views.index.createnew'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }} {{ entity }}
         </a>
     </div>

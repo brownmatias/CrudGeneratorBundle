@@ -1,12 +1,14 @@
 <div>
     <div class="float-left">
         <a class="btn" href="{{ "{{ path('"~ route_name_prefix ~"') }}" }}">
+            <i class="icon-arrow-left"></i>
             {{ "{{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}
         </a>
     </div>
 {% if ('edit' in actions) and (not hide_edit) %}
     <div class="float-left">
         <a class="btn btn-primary" href="{{ "{{ path('"~ route_name_prefix ~"_edit', { 'id': entity.id }) }}" }}">
+            <i class="icon-pencil"></i>
             {{ "{{ 'views.recordactions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}
         </a>
     </div>
@@ -16,7 +18,7 @@
         <form action="{{ "{{ path('"~ route_name_prefix ~"_delete', { 'id': entity.id }) }}" }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ '{{ form_widget(delete_form) }}' }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ "{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}');">{{ "{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}</button>
+            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ "{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}');"><i class="icon-remove"></i>{{ "{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}" }}</button>
         </form>
     </div>
 {% endif %}
