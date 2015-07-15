@@ -1,0 +1,17 @@
+
+{% block field_help %}
+    {% if help|default %}
+        <p class="help-block">{{ help|trans }}</p>
+    {% endif %}
+{% endblock %}
+
+{% block form_row %}
+{% spaceless %}
+    <div class="form_row">
+        {{ form_label(form, label|default(null)) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+        {{ block('field_help') }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}
