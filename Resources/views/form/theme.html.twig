@@ -15,3 +15,13 @@
     </div>
 {% endspaceless %}
 {% endblock form_row %}
+
+{% block choice_widget_expanded %}
+    <div {{ block('widget_container_attributes') }}>
+    {% for child in form %}
+        {{ form_widget(child) }}
+        {% set label_attr = label_attr|merge({'class': 'choice-label' }) %}
+        {{ form_label(child, null, {translation_domain: choice_translation_domain}) }}
+    {% endfor %}
+    </div>
+{% endblock choice_widget_expanded %}
